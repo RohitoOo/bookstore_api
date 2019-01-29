@@ -24,3 +24,17 @@ module.exports.getGenres = () => {
 module.exports.getGenreByName = name => {
   return Genre.find({ name })
 }
+
+module.exports.addGenre = genre => {
+  return Genre.create(genre)
+}
+
+module.exports.updateGenre = genre => {
+  console.log(genre.id, genre.name)
+
+  return Genre.findOneAndUpdate({ _id: genre.id }, { name: genre.name })
+}
+
+module.exports.deleteGenre = genre => {
+  return Genre.remove({ _id: genre.id })
+}

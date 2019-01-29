@@ -3,7 +3,7 @@ let mongoose = require("mongoose")
 // Book Schema
 
 var bookSchema = mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: true
   },
@@ -20,6 +20,10 @@ var bookSchema = mongoose.Schema({
     required: true
   },
   buy_url: {
+    type: String,
+    required: true
+  },
+  pages: {
     type: String,
     required: true
   },
@@ -43,4 +47,12 @@ module.exports.getBookById = id => {
 
 module.exports.getBookByName = title => {
   return Book.find({ title })
+}
+
+module.exports.addBook = book => {
+  return Book.create(book)
+}
+
+module.exports.deleteBook = book => {
+  return Book.deleteOne({ _id: book.id })
 }
