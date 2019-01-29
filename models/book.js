@@ -33,10 +33,14 @@ let Book = (module.exports = mongoose.model("Book", bookSchema))
 
 // Get Genres
 
-module.exports.getBooks = callback => {
-  Book.find(callback)
+module.exports.getBooks = () => {
+  return Book.find()
 }
 
 module.exports.getBookById = id => {
   return Book.findById(id)
+}
+
+module.exports.getBookByName = title => {
+  return Book.find({ title })
 }

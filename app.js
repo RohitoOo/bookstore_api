@@ -12,16 +12,16 @@ mongoose.connect(
 
 var db = mongoose.connection
 
-// Genre.getGenres((err, data) => {
-//   console.log(data)
-// })
-
-// Book.getBooks((err, data) => {
-//   console.log(data)
-// })
-
 app.get("/", (req, res) => {
-  res.send("Hello World!")
+  res.send("Use /api/books OR /api/genres")
+})
+
+// Get All Books
+
+app.get("/api/books", async (req, res) => {
+  let books = await Book.getBooks()
+
+  res.send(books)
 })
 
 // Get Book By Id
@@ -30,8 +30,24 @@ app.get("/api/books/:_id", async (req, res) => {
   res.send(book)
 })
 
-app.get("/api/genres", (req, res) => {
-  res.send("Hello World!")
+// Get Book By Title
+app.get("/api/books/title/:title", async (req, res) => {
+  let book = await Book.getBookByName(req.params.title)
+  res.send(book)
+})
+
+// Get All Genres
+
+app.get("/api/genres", async (req, res) => {
+  let genres = await Genre.getGenres()
+  res.send(genres)
+})
+
+// Get Genre By Name
+
+app.get("/api/genres/:name", async (req, res) => {
+  let genre = await Genre.getGenreByName(req.params.name)
+  res.send(genre)
 })
 
 app.listen(3000, () => {

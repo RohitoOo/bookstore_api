@@ -17,6 +17,10 @@ let Genre = (module.exports = mongoose.model("Genre", genreSchema))
 
 // Get Genres
 
-module.exports.getGenres = callback => {
-  Genre.find(callback)
+module.exports.getGenres = () => {
+  return Genre.find()
+}
+
+module.exports.getGenreByName = name => {
+  return Genre.find({ name })
 }
